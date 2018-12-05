@@ -187,14 +187,7 @@ public without sharing class GlenigenServiceIntegrationUtility  {
             system.debug('=================' + mainQuery );
             //system.debug('=================' + Database.query(mainQuery) );
             for(Account acc : Database.query(mainQuery)){
-                List<String> abiCompanies = acc.Glenigan_Company_Id__c.split(';');
-                for(String abiCom : abiCompanies){
-                    accountMap.put(abiCom,acc);
-                }
-            }
-        }
-        System.debug('--Account Map--'+accountMap);
-        return accountMap;
+           
       }   
       
     //------------------------------------------------------------------
@@ -208,15 +201,7 @@ public without sharing class GlenigenServiceIntegrationUtility  {
              HttpRequest req = new HttpRequest();
              //req.setEndpoint('http://www.gleniganapi.com/InsightApi/ProjectDetail(11140)?$format=json&$expand=GroupProjectRoles/ProjectRoles/CompaniesInProjectRole');
              req.setEndpoint(endPoint);
-             req.setMethod('GET');               
-             //set auth token to cookies
-             req.setHeader('Cookie','.ASPXAUTH=' + authToken);
-           
-            
-             // A response object is generated as a result of the request           
-          
-             Http http = new Http();
-             HTTPResponse res = http.send(req);
+
              return res.getBody();
          }catch(Exception e){}
          return '';
